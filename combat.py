@@ -1,12 +1,28 @@
 import random
 
-
 class Combat:
+    """
+    Klasa obsługująca walkę pomiędzy graczem a wrogiem.
+
+    Parameters
+    ----------
+    player : object
+        Obiekt reprezentujący gracza, musi mieć atrybuty: player_name, hp, armor, damage, max_hp,
+        max_stamina, stamina, metody: takeDamage, healHP, regenerateStamina, haveEnoughStamina, useStamina,
+        is_alive oraz player_level_manager i player_inventory z wallet.
+    enemy : object
+        Obiekt reprezentujący przeciwnika, musi mieć atrybuty: enemy_name, hp, armor, damage, max_hp,
+        xp_drop, gold_drop, is_alive oraz metodę takeDamage.
+    """
+
     def __init__(self, player, enemy):
         self.player = player
         self.enemy = enemy
 
     def displayBattleStatus(self):
+        """
+        Wyświetla aktualny status walki: HP, pancerz i obrażenia gracza i przeciwnika.
+        """
         print(f"""
         {self.player.player_name}
 Player HP: {self.player.hp}
@@ -19,8 +35,15 @@ Enemy Armor: {self.enemy.armor}
 Enemy Damage: {self.enemy.damage}
 """)
 
-    # Attack handling functions
     def normalAttack(self):
+        """
+        Wykonuje normalny atak gracza na przeciwnika.
+
+        Efekty
+        -------
+        Obniża HP przeciwnika o wartość damage gracza.
+        Wypisuje informacje o zadanych obrażeniach i stanie przeciwnika.
+        """
         self.enemy.takeDamage(self.player.damage)
         print(f"""
 {self.player.player_name} dealt {self.player.damage} dmg!
@@ -28,6 +51,14 @@ Enemy Damage: {self.enemy.damage}
 """)
 
     def strongAttack(self):
+        """
+        Wykonuje silny atak z 50% szansą trafienia.
+
+        Efekty
+        -------
+        Jeśli atak trafi, zadaje podwójne obrażenia.
+        W przeciwnym wypadku atak chybi i gracz traci turę.
+        """
         if random.random() < 0.5:
             print("Your attack hit the enemy!")
             self.enemy.takeDamage(self.player.damage * 2)
@@ -39,6 +70,20 @@ Enemy Damage: {self.enemy.damage}
             print("Your attack missed! You lost your turn!")
 
     def fastAttack(self):
+        """
+        Wykonuje szybki atak z 30% szansą trafienia.
+
+        Returns
+        -------
+        int
+            0 - jeśli atak trafił i gracz może zaatakować ponownie,
+            1 - jeśli atak chybił i gracz traci turę.
+
+        Efekty
+        -------
+        Jeśli atak trafi, zadaje normalne obrażenia i pozwala na dodatkowy atak.
+        Jeśli chybi, gracz traci turę.
+        """
         if random.random() < 0.3:
             print("Your attack hit the enemy!")
             self.enemy.takeDamage(self.player.damage)
@@ -53,12 +98,32 @@ Enemy Damage: {self.enemy.damage}
             return 1
 
     def recovery(self):
+        """
+        Przywraca zdrowie i regeneruje staminy gracza.
+
+        Efekty
+        -------
+        Gracz leczy 15% swojego maksymalnego HP i regeneruje 35% maksymalnej staminy.
+        Wypisuje aktualny stan HP i staminy gracza.
+        """
         self.player.healHP(int(self.player.max_hp * 0.15))
         self.player.regenerateStamina(int(self.player.max_stamina * 0.35))
         print("You catch your breath and recover some stamina!")
         print(f"Player HP: {self.player.hp} / {self.player.max_hp}\nPlayer Stamina: {self.player.stamina}")
 
     def player_turn(self):
+        """
+        Obsługuje turę gracza.
+
+        Pobiera od użytkownika wybór ataku i wykonuje odpowiednią akcję,
+        sprawdzając czy gracz ma wystarczająco staminy.
+
+        Returns
+        -------
+        int
+            1 - zakończona tura gracza,
+            0 - tura anulowana (np. brak staminy), gracz może spróbować ponownie.
+        """
         print("Select attack!")
         attack_selection = None
         try:
@@ -98,6 +163,11 @@ Enemy Damage: {self.enemy.damage}
                 return 1
 
     def enemy_turn(self):
+        """
+        Obsługuje turę przeciwnika.
+
+        Przeciwnik zadaje obrażenia graczowi i wypisuje informacje o zadanym dmg oraz stanie gracza.
+        """
         self.player.takeDamage(self.enemy.damage)
         print(f"""
 {self.enemy.enemy_name} dealt {self.enemy.damage} dmg!
@@ -105,9 +175,14 @@ Enemy Damage: {self.enemy.damage}
 """)
 
     def fight(self):
-        # Who starts
-        # - 0 - Player
-        # - 1 - Enemy
+        """
+        Przeprowadza główną pętlę walki, naprzemiennie wykonując tury gracza i przeciwnika.
+
+        Losuje kto zaczyna (0 = gracz, 1 = przeciwnik) i kontynuuje walkę,
+        dopóki obie strony żyją.
+
+        Regeneruje staminy gracza po turze przeciwnika.
+        """
         turn_owner = random.randint(0, 1)
         while self.player.is_alive and self.enemy.is_alive:
             if turn_owner == 0:
@@ -120,6 +195,15 @@ Enemy Damage: {self.enemy.damage}
                 turn_owner = 0
 
     def fight_result(self):
+        """
+        Sprawdza wynik walki po zakończeniu.
+
+        Returns
+        -------
+        int
+            1 jeśli gracz wygrał,
+            0 w przypadku remisu lub przegranej.
+        """
         if not self.player.is_alive and not self.enemy.is_alive:
             print("Tie!")
             return 0
@@ -131,11 +215,20 @@ Enemy Damage: {self.enemy.damage}
             return 1
 
     def give_drop(self):
+        """
+        Przyznaje nagrody graczowi po wygranej walce.
+
+        Dodaje doświadczenie i złoto do odpowiednich atrybutów gracza,
+        wypisuje informację o nagrodzie.
+        """
         self.player.player_level_manager.giveXP(self.enemy.xp_drop)
         self.player.player_inventory.wallet += self.enemy.gold_drop
         print(f"Battle won! Gained {self.enemy.gold_drop} gold & {self.enemy.xp_drop} XP!")
 
     def startBattle(self):
+        """
+        Inicjuje walkę: wyświetla status, przeprowadza walkę i przyznaje nagrody w razie wygranej.
+        """
         self.displayBattleStatus()
         self.fight()
         if self.fight_result() == 1:

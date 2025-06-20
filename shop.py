@@ -1,5 +1,26 @@
 class Shop:
+    """
+    Sklep, w którym gracz może kupować bronie i zbroje.
+
+    Attributes
+    ----------
+    player : Player
+        Obiekt gracza, który dokonuje zakupów.
+    weapons : dict
+        Słownik dostępnych broni, z ich obrażeniami i cenami.
+    armors : dict
+        Słownik dostępnych zbroi, z ich wartością pancerza i cenami.
+    """
+
     def __init__(self, player):
+        """
+        Inicjalizuje sklep z listą broni i zbroi oraz przypisuje gracza.
+
+        Parameters
+        ----------
+        player : Player
+            Gracz, który będzie kupował przedmioty.
+        """
         self.player = player
         self.weapons = {
             "Wooden Stick": {"damage": 5, "price": 10},
@@ -8,7 +29,6 @@ class Shop:
             "Dark Bow": {"damage": 30, "price": 180},
             "Dragon Sword": {"damage": 50, "price": 500},
         }
-
         self.armors = {
             "Leather Jacket": {"armor": 5, "price": 20},
             "Chainmail": {"armor": 15, "price": 60},
@@ -18,11 +38,18 @@ class Shop:
         }
 
     def showItemsToBuy(self):
+        """
+        Wyświetla menu sklepu i obsługuje proces zakupu broni i zbroi.
+
+        Funkcja pyta gracza co chce kupić (broń, zbroję lub wyjść),
+        wyświetla dostępne przedmioty, sprawdza stan portfela,
+        dokonuje zakupu i aktualizuje statystyki gracza.
+        """
         bad_answer = True
         player_choice = None
         while bad_answer:
             try:
-                player_choice = int(input("What do you want to buy?\n1. Weapon\n2. Armor\n3. Exit"))
+                player_choice = int(input("What do you want to buy?\n1. Weapon\n2. Armor\n3. Exit\n"))
                 if 3 >= player_choice >= 1:
                     bad_answer = False
             except ValueError:
@@ -81,7 +108,6 @@ class Shop:
                 print(f"You bought {armor_list[armor_choice]}! Your armor: {self.player.armor}")
             else:
                 print("Not enough gold!")
-
 
         elif player_choice == 3:
             return
