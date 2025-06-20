@@ -6,11 +6,11 @@ class Combat:
 
     Parameters
     ----------
-    player : object
+    player : Player
         Obiekt reprezentujący gracza, musi mieć atrybuty: player_name, hp, armor, damage, max_hp,
         max_stamina, stamina, metody: takeDamage, healHP, regenerateStamina, haveEnoughStamina, useStamina,
         is_alive oraz player_level_manager i player_inventory z wallet.
-    enemy : object
+    enemy : Enemy
         Obiekt reprezentujący przeciwnika, musi mieć atrybuty: enemy_name, hp, armor, damage, max_hp,
         xp_drop, gold_drop, is_alive oraz metodę takeDamage.
     """
@@ -125,7 +125,6 @@ Enemy Damage: {self.enemy.damage}
             0 - tura anulowana (np. brak staminy), gracz może spróbować ponownie.
         """
         print("Select attack!")
-        attack_selection = None
         try:
             attack_selection = int(input(
                 "1. Normal attack (100%) - 20 Stamina\n2. Strong attack (50%) - 35 Stamina\n3. Fast attack (30%) - 15 Stamina\n4. Heal"))
@@ -213,6 +212,9 @@ Enemy Damage: {self.enemy.damage}
         elif self.player.is_alive and not self.enemy.is_alive:
             print("You won!")
             return 1
+        else:
+            print("Error! No one won!")
+            return None
 
     def give_drop(self):
         """
