@@ -35,24 +35,26 @@ class GameInit:
         fight.startBattle()
 
     def generateEnemy(self):
-        lower_stat_hp = int(self.player.max_hp * 0.9)  # 90%
-        upper_stat_hp = int(self.player.max_hp * 1.05)  # 105%
+        LOWER_STAT_PERCENTAGE = 0.85
+        UPPER_STAT_PERCENTAGE = 1.05
+        lower_stat_hp = int(self.player.max_hp * LOWER_STAT_PERCENTAGE)  # 90%
+        upper_stat_hp = int(self.player.max_hp * UPPER_STAT_PERCENTAGE)  # 105%
         randomized_hp = random.randint(lower_stat_hp, upper_stat_hp)
 
-        lower_stat_armor = int(self.player.armor * 0.9)  # 90%
-        upper_stat_armor = int(self.player.armor * 1.05)  # 105%
+        lower_stat_armor = int(self.player.armor * LOWER_STAT_PERCENTAGE)  # 90%
+        upper_stat_armor = int(self.player.armor * UPPER_STAT_PERCENTAGE)  # 105%
         randomized_armor = random.randint(lower_stat_armor, upper_stat_armor)
 
-        lower_stat_damage = int(self.player.damage * 0.9)  # 90%
-        upper_stat_damage = int(self.player.damage * 1.05)  # 105%
+        lower_stat_damage = int(self.player.damage * LOWER_STAT_PERCENTAGE)  # 90%
+        upper_stat_damage = int(self.player.damage * UPPER_STAT_PERCENTAGE)  # 105%
         randomized_damage = random.randint(lower_stat_damage, upper_stat_damage)
 
-        lower_stat_gold = int(randomized_hp * 0.9)  # 90%
-        upper_stat_gold = int(randomized_hp * 1.05)  # 105%
+        lower_stat_gold = int(randomized_hp * LOWER_STAT_PERCENTAGE)  # 90%
+        upper_stat_gold = int(randomized_hp * UPPER_STAT_PERCENTAGE)  # 105%
         randomized_gold = random.randint(lower_stat_gold, upper_stat_gold)
 
-        lower_stat_xp = int(randomized_hp * 0.9)  # 90%
-        upper_stat_xp = int(randomized_hp * 1.05)  # 105%
+        lower_stat_xp = int(randomized_hp * LOWER_STAT_PERCENTAGE)  # 90%
+        upper_stat_xp = int(randomized_hp * UPPER_STAT_PERCENTAGE)  # 105%
         randomized_xp = random.randint(lower_stat_xp, upper_stat_xp)
 
         randomized_name = f"{random.choice(self.names)} {random.choice(self.nicknames)}"

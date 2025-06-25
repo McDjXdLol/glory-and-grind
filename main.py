@@ -24,8 +24,10 @@ def main():
         match sel:
             case 1:
                 rival = gi.generateEnemy()
-                Combat(player, rival).startBattle()
-                continue
+                if Combat(player, rival).startBattle():
+                    continue
+                else:
+                    break
             case 2:
                 shop.openItemShop()
                 continue
@@ -35,7 +37,6 @@ def main():
             case _:
                 print("You entered the wrong number! Try again")
                 continue
-
 
 if __name__ == "__main__":
     main()

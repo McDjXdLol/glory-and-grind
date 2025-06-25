@@ -25,6 +25,7 @@ class Player:
         self.hp = hp
         self.max_hp = hp
         self.armor = armor
+        self.max_armor = armor
         self.damage = damage
         self.stamina = stamina
         self.max_stamina = stamina

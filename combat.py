@@ -233,4 +233,10 @@ Enemy Damage: {self.enemy.damage}
         self.displayBattleStatus()
         self.fight()
         if self.fight_result() == 1:
+            self.player.hp = self.player.max_hp
+            self.player.armor = self.player.max_armor
+            self.player.stamina = self.player.max_stamina
             self.give_drop()
+            return True
+        else:
+            return False

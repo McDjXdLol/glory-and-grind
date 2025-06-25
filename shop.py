@@ -70,7 +70,7 @@ class Shop:
             while bad_answer:
                 try:
                     weapon_choice = int(input(f"Which one do you want to buy?\nYour gold: {self.player.player_inventory.wallet}\n"))
-                    if len(weapon_list) >= weapon_choice >= 1:
+                    if len(weapon_list) >= weapon_choice >= 0:
                         bad_answer = False
                 except ValueError:
                     print("You have to enter the number!")
@@ -99,7 +99,7 @@ class Shop:
             while bad_answer:
                 try:
                     armor_choice = int(input(f"Which one do you want to buy?\nYour gold: {self.player.player_inventory.wallet}\n"))
-                    if len(armor_list) >= armor_choice >= 1:
+                    if len(armor_list) >= armor_choice >= 0:
                         bad_answer = False
                 except ValueError:
                     print("You have to enter the number!")
@@ -135,6 +135,7 @@ class Shop:
                         return
                     case 2:
                         self.player.armor += 5
+                        self.player.max_armor += 5
                         print(f"Your armor has increased! You can have now {self.player.armor} armor!")
                         return
                     case 3:
