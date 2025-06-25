@@ -48,7 +48,7 @@ def main():
 if __name__ == "__main__":
     while True:
         main()
-        print("Try again? (y\n)")
+        print("Try again? (y/n)")
         if input().lower() == "y":
             continue
         else:

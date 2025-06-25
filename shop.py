@@ -124,7 +124,7 @@ class Shop:
             while True:
                 while True:
                     try:
-                        sel = int(input("1. +10 HP\n2. +5 Armor\n 3. +5 Damage\n 4. +10 Stamina"))
+                        sel = int(input("1. +10 HP\n2. +5 Armor\n3. +5 Damage\n4. +10 Stamina"))
                         break
                     except ValueError:
                         print("You have to enter the number! Try again")
