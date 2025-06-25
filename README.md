@@ -78,7 +78,7 @@ Got ideas or feedback? Reach out on GitHub: [McDjXdLol](https://github.com/McDjX
 ---
 
 ## License 📄
-Distributed under the MIT License. See LICENSE for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ---
 
