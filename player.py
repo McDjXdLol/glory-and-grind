@@ -8,15 +8,15 @@ class Player:
 
     Parameters
     ----------
-    hp : int
+    hp: int
         Maksymalne i początkowe punkty życia gracza.
-    armor : int
+    armor: int
         Ilość pancerza gracza, pochłaniającego obrażenia przed HP.
-    damage : int
+    damage: int
         Obrażenia zadawane przez gracza.
-    stamina : int
+    stamina: int
         Maksymalna i początkowa wartość staminy (energii do ataków).
-    name : str
+    name: str
         Nazwa (nick) gracza.
     """
 
@@ -39,7 +39,7 @@ class Player:
 
         Parameters
         ----------
-        amount : int
+        amount: int
             Ilość obrażeń do zadania.
 
         Notes
@@ -75,7 +75,7 @@ class Player:
 
         Parameters
         ----------
-        amount : int
+        amount: int
             Ilość punktów życia do przywrócenia.
 
         Notes
@@ -93,7 +93,7 @@ class Player:
 
         Parameters
         ----------
-        amount : int
+        amount: int
             Ilość staminy do zużycia.
 
         Notes
@@ -111,13 +111,13 @@ class Player:
 
         Parameters
         ----------
-        amount : int
+        amount: int
             Wymagana ilość staminy.
 
         Returns
         -------
         bool
-            True jeśli gracz ma co najmniej tyle staminy, False w przeciwnym razie.
+            True, jeśli gracz ma co najmniej tyle staminy, False w przeciwnym razie.
         """
         return self.stamina >= amount
 
@@ -127,7 +127,7 @@ class Player:
 
         Parameters
         ----------
-        amount : int
+        amount: int
             Ilość staminy do odzyskania.
 
         Notes

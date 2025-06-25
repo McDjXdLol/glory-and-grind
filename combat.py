@@ -116,7 +116,7 @@ Enemy Damage: {self.enemy.damage}
         Obsługuje turę gracza.
 
         Pobiera od użytkownika wybór ataku i wykonuje odpowiednią akcję,
-        sprawdzając czy gracz ma wystarczająco staminy.
+        sprawdzając, czy gracz ma wystarczająco staminy.
 
         Returns
         -------
@@ -124,7 +124,6 @@ Enemy Damage: {self.enemy.damage}
             1 - zakończona tura gracza,
             0 - tura anulowana (np. brak staminy), gracz może spróbować ponownie.
         """
-        print("Select attack!")
         try:
             attack_selection = int(input(
                 "1. Normal attack (100%) - 20 Stamina\n2. Strong attack (50%) - 35 Stamina\n3. Fast attack (30%) - 15 Stamina\n4. Heal"))
@@ -200,8 +199,8 @@ Enemy Damage: {self.enemy.damage}
         Returns
         -------
         int
-            1 jeśli gracz wygrał,
-            0 w przypadku remisu lub przegranej.
+            1, jeśli gracz wygrał,
+            0, w przypadku remisu lub przegranej.
         """
         if not self.player.is_alive and not self.enemy.is_alive:
             print("Tie!")

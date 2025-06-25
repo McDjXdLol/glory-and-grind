@@ -4,17 +4,17 @@ class Enemy:
 
     Parameters
     ----------
-    hp : int
+    hp: int
         Maksymalne i początkowe punkty życia wroga.
-    armor : int
+    armor: int
         Ilość pancerza wroga, który pochłania obrażenia przed HP.
-    damage : int
+    damage: int
         Obrażenia zadawane przez wroga.
-    name : str
+    name: str
         Nazwa wroga.
-    gold : int
+    gold: int
         Ilość złota, którą wróg upuszcza po śmierci.
-    xp : int
+    xp: int
         Ilość doświadczenia (XP) przyznawanego za pokonanie wroga.
     """
 
@@ -35,7 +35,7 @@ class Enemy:
 
         Parameters
         ----------
-        amount : int
+        amount: int
             Ilość obrażeń do zadania.
 
         Notes

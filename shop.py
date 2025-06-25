@@ -4,11 +4,11 @@ class Shop:
 
     Attributes
     ----------
-    player : Player
+    player: Player
         Obiekt gracza, który dokonuje zakupów.
-    weapons : dict
+    weapons: dict
         Słownik dostępnych broni, z ich obrażeniami i cenami.
-    armors : dict
+    armors: dict
         Słownik dostępnych zbroi, z ich wartością pancerza i cenami.
     """
 
@@ -18,7 +18,7 @@ class Shop:
 
         Parameters
         ----------
-        player : Player
+        player: Player
             Gracz, który będzie kupował przedmioty.
         """
         self.player = player
@@ -37,7 +37,7 @@ class Shop:
             "Dragon Armor": {"armor": 60, "price": 600},
         }
 
-    def showItemsToBuy(self):
+    def openItemShop(self):
         """
         Wyświetla menu sklepu i obsługuje proces zakupu broni i zbroi.
 
