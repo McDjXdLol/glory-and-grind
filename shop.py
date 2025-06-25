@@ -22,6 +22,7 @@ class Shop:
             Gracz, który będzie kupował przedmioty.
         """
         self.player = player
+        self.player_points_to_spend = player.player_level_manager.points_to_spend
         self.weapons = {
             "Wooden Stick": {"damage": 5, "price": 10},
             "Iron Sword": {"damage": 15, "price": 50},
@@ -111,3 +112,39 @@ class Shop:
 
         elif player_choice == 3:
             return
+
+    def openPointsShop(self):
+        if self.player_points_to_spend > 0:
+            while True:
+                sel = None
+                while True:
+                    try:
+                        sel = int(input("1. +10 HP\n2. + 5 Armor\n 3. +5 Damage\n 4. + 10 Stamina"))
+                        break
+                    except ValueError:
+                        print("You have to enter the number! Try again")
+                match sel:
+                    case 1:
+                        self.player.max_hp += 10
+                        self.player.hp += 10
+                        print(f"Your HP has increased! You can have now {self.player.max_hp} HP!")
+                        return
+                    case 2:
+                        self.player.armor += 5
+                        print(f"Your armor has increased! You can have now {self.player.armor} armor!")
+                        return
+                    case 3:
+                        self.player.damage += 5
+                        print(f"Your damage has increased! You have now {self.player.damage} dmg!")
+                        return
+                    case 4:
+                        self.player.stamina += 10
+                        self.player.max_stamina += 10
+                        print(f"Your stamina has increased! You can have now {self.player.max_stamina} stamina!")
+                        return
+                    case _:
+                        print("You have entered the wrong number! Try again!")
+                        continue
+
+        else:
+            print("You have no points to spend! Get out!")
