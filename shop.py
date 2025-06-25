@@ -119,11 +119,12 @@ class Shop:
             return
 
     def openPointsShop(self):
+        self.player_points_to_spend = self.player.player_level_manager.points_to_spend
         if self.player_points_to_spend > 0:
             while True:
                 while True:
                     try:
-                        sel = int(input("1. +10 HP\n2. + 5 Armor\n 3. +5 Damage\n 4. + 10 Stamina"))
+                        sel = int(input("1. +10 HP\n2. +5 Armor\n 3. +5 Damage\n 4. +10 Stamina"))
                         break
                     except ValueError:
                         print("You have to enter the number! Try again")
@@ -150,6 +151,7 @@ class Shop:
                     case _:
                         print("You have entered the wrong number! Try again!")
                         continue
+                self.player.player_level_manager.points_to_spend -= 1
 
         else:
             print("You have no points to spend! Get out!")

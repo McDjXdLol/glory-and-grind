@@ -1,3 +1,6 @@
+import sys
+import time
+
 from combat import Combat
 from game_init import GameInit
 from player import Player
@@ -17,7 +20,7 @@ def main():
     while True:
         sel = 0
         try:
-            sel = int(input("1. Arena\n2. Shop\n3. Spend Points"))
+            sel = int(input("1. Arena\n2. Shop\n3. Spend Points\n4. Exit"))
         except ValueError:
             print("You have to enter the number! Try again")
             continue
@@ -34,9 +37,20 @@ def main():
             case 3:
                 shop.openPointsShop()
                 continue
+            case 4:
+                print("Exiting...")
+                time.sleep(2)
+                sys.exit()
             case _:
                 print("You entered the wrong number! Try again")
                 continue
 
 if __name__ == "__main__":
-    main()
+    while True:
+        main()
+        print("Try again? (y\n)")
+        if input().lower() == "y":
+            continue
+        else:
+            break
+

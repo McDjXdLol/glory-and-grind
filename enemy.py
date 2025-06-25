@@ -45,7 +45,7 @@ class Enemy:
         - Jeśli suma pancerza i HP spadnie do 0 lub mniej, wróg zostaje zabity.
         """
         if (self.hp + self.armor) - amount <= 0:
-            self.killPlayer()
+            self.killEnemy()
         else:
             if self.armor > 0:
                 if self.armor - amount <= 0:
@@ -57,7 +57,7 @@ class Enemy:
             else:
                 self.hp -= amount
 
-    def killPlayer(self):
+    def killEnemy(self):
         """
         Ustawia stan wroga jako martwy.
         """

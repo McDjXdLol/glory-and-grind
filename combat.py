@@ -152,6 +152,7 @@ Enemy Damage: {self.enemy.damage}
                     self.player.useStamina(15)
                     return self.fastAttack()
                 else:
+                    print("You don't have enough stamina!")
                     return 0
             case 4:
                 self.recovery()

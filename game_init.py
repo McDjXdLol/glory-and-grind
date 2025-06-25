@@ -34,28 +34,24 @@ class GameInit:
         fight = Combat(self.player, self.enemy)
         fight.startBattle()
 
-    def generateEnemy(self):
+    @staticmethod
+    def randomize_stat(stat):
         LOWER_STAT_PERCENTAGE = 0.85
         UPPER_STAT_PERCENTAGE = 1.05
-        lower_stat_hp = int(self.player.max_hp * LOWER_STAT_PERCENTAGE)  # 90%
-        upper_stat_hp = int(self.player.max_hp * UPPER_STAT_PERCENTAGE)  # 105%
-        randomized_hp = random.randint(lower_stat_hp, upper_stat_hp)
+        lower_stat = int(stat * LOWER_STAT_PERCENTAGE)
+        upper_stat = int(stat * UPPER_STAT_PERCENTAGE)
+        return random.randint(lower_stat, upper_stat)
 
-        lower_stat_armor = int(self.player.armor * LOWER_STAT_PERCENTAGE)  # 90%
-        upper_stat_armor = int(self.player.armor * UPPER_STAT_PERCENTAGE)  # 105%
-        randomized_armor = random.randint(lower_stat_armor, upper_stat_armor)
+    def generateEnemy(self):
+        randomized_hp = self.randomize_stat(self.player.hp)
 
-        lower_stat_damage = int(self.player.damage * LOWER_STAT_PERCENTAGE)  # 90%
-        upper_stat_damage = int(self.player.damage * UPPER_STAT_PERCENTAGE)  # 105%
-        randomized_damage = random.randint(lower_stat_damage, upper_stat_damage)
+        randomized_armor = self.randomize_stat(self.player.armor)
 
-        lower_stat_gold = int(randomized_hp * LOWER_STAT_PERCENTAGE)  # 90%
-        upper_stat_gold = int(randomized_hp * UPPER_STAT_PERCENTAGE)  # 105%
-        randomized_gold = random.randint(lower_stat_gold, upper_stat_gold)
+        randomized_damage = self.randomize_stat(self.player.damage)
 
-        lower_stat_xp = int(randomized_hp * LOWER_STAT_PERCENTAGE)  # 90%
-        upper_stat_xp = int(randomized_hp * UPPER_STAT_PERCENTAGE)  # 105%
-        randomized_xp = random.randint(lower_stat_xp, upper_stat_xp)
+        randomized_gold = self.randomize_stat(randomized_hp)
+
+        randomized_xp = self.randomize_stat(randomized_hp)
 
         randomized_name = f"{random.choice(self.names)} {random.choice(self.nicknames)}"
 
