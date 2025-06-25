@@ -1,3 +1,4 @@
+from combat import Combat
 from game_init import GameInit
 from player import Player
 from player_setup import PlayerSetup
@@ -10,7 +11,8 @@ def main():
     """
     NICKNAME = PlayerSetup.getPlayerName()
     player = Player(100, 100, 20, 100, NICKNAME)
-    GameInit(player).firstFight()
+    gi = GameInit(player)
+    gi.firstFight()
     shop = Shop(player)
     while True:
         sel = 0
@@ -21,8 +23,9 @@ def main():
             continue
         match sel:
             case 1:
-                # Fight
-                pass
+                rival = gi.generateEnemy()
+                Combat(player, rival).startBattle()
+                continue
             case 2:
                 shop.openItemShop()
                 continue
@@ -33,16 +36,6 @@ def main():
                 print("You entered the wrong number! Try again")
                 continue
 
-
-    # TODO:
-    #  - [x] Dodać wpisywanie nazwy użytkownika
-    #  - [-] Zrobić wybór klasy
-    #  - [+] Pierwsza walka/tutorial
-    #  - [ ] Rozpisać "tworzenie przeciwników" / napisać "przeciwników"
-    #  - [ ] Reszta gry:
-    #   - [ ] Dostęp do areny (tam walka z następnym przeciwnikiem)
-    #   - [x] Dostęp do sklepu z broniami i zbrojami
-    #   - [ ] Dostęp do "sklepu z punktami" (gracz może wydawać swoje punkty doświadczenia)
 
 if __name__ == "__main__":
     main()

@@ -59,6 +59,7 @@ class Shop:
         if player_choice == 1:
             weapon_list = []
             print("These are the weapons that I sell:")
+            print("0. Exit")
             for nr, weapon_name in enumerate(self.weapons):
                 print(
                     f"{nr + 1}. {weapon_name} {self.weapons[weapon_name]['damage']} dmg - {self.weapons[weapon_name]['price']} gold")
@@ -73,7 +74,8 @@ class Shop:
                         bad_answer = False
                 except ValueError:
                     print("You have to enter the number!")
-
+            if weapon_choice == 0:
+                return
             weapon_choice -= 1
             if self.player.player_inventory.hasEnoughMoney(self.weapons[weapon_list[weapon_choice]]['price']):
                 self.player.player_inventory.wallet -= self.weapons[weapon_list[weapon_choice]]['price']
@@ -87,6 +89,7 @@ class Shop:
         elif player_choice == 2:
             armor_list = []
             print("These are the armors that I sell:")
+            print("0. Exit")
             for nr, armor in enumerate(self.armors):
                 print(f"{nr + 1}. {armor} {self.armors[armor]['armor']} armor - {self.armors[armor]['price']} gold")
                 armor_list.append(armor)
@@ -100,6 +103,8 @@ class Shop:
                         bad_answer = False
                 except ValueError:
                     print("You have to enter the number!")
+            if armor_choice == 0:
+                return
             armor_choice -= 1
             if self.player.player_inventory.hasEnoughMoney(self.armors[armor_list[armor_choice]]['price']):
                 self.player.player_inventory.wallet -= self.armors[armor_list[armor_choice]]['price']
@@ -116,7 +121,6 @@ class Shop:
     def openPointsShop(self):
         if self.player_points_to_spend > 0:
             while True:
-                sel = None
                 while True:
                     try:
                         sel = int(input("1. +10 HP\n2. + 5 Armor\n 3. +5 Damage\n 4. + 10 Stamina"))
